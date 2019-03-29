@@ -1,18 +1,37 @@
 <?php
 
-namespace Test;
+namespace AdvancedInjection;
 
 class ExecClassWithoutInjection
 {
+    protected $status;
+
     protected $client;
 
-    public function __construct(DataClass $input = null)
+    public function __construct()
     {
-        $this->client = !is_null($input) ? $input : new DataClass();
+        $this->client = new DataClass();
+
+        $this->status = $this->load();
+
+        if (empty($this->status)) {
+            throw new \Exception('Unstatused');
+        }
     }
 
     public function exec(): string
     {
-        return $this->client->getData();
+        $result = $this->client->getData();
+
+        if (empty($result)) {
+            throw new \Exception('Mocked');
+        }
+
+        return $result;
+    }
+
+    protected function load(): array
+    {
+        return $this->client->load();
     }
 }

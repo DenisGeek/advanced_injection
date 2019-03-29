@@ -1,8 +1,6 @@
 <?php
 
-namespace Test;
-
-\class_exists(MockDataClass::class);
+namespace AdvancedInjection;
 
 class DataClass
 {
@@ -16,5 +14,10 @@ class DataClass
     public function getData(): string
     {
         return $this->data;
+    }
+
+    public function load(): array
+    {
+        return [1, 2, 3];
     }
 }
