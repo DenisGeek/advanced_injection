@@ -4,7 +4,7 @@ namespace AdvancedInjection;
 
 class DataClass
 {
-    protected $data;
+    protected $data = '';
 
     public function __construct()
     {
@@ -13,6 +13,9 @@ class DataClass
 
     public function getData(): string
     {
+        if (empty($this->data)) {
+            throw new \Exception('Storage empty');
+        }
         return $this->data;
     }
 
